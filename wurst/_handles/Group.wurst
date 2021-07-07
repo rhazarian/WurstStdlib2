@@ -28,7 +28,9 @@ public function group.enumUnitsOfPlayer(player p, boolexpr filter)
 
 public function group.enumUnitsAll(boolexpr filter)
 	for i = 0 to bj_MAX_PLAYER_SLOTS - 1
-		this.enumUnitsOfPlayer(players[i], filter)
+		ENUM_GROUP.enumUnitsOfPlayer(players[i], filter)
+		this.addGroup(ENUM_GROUP)
+	ENUM_GROUP.clear()
 
 public function group.clear()
 	GroupClear(this)
@@ -87,10 +89,10 @@ public function group.targetOrder(int order, widget targetWidget) returns boolea
 	return GroupTargetOrderById(this, order, targetWidget)
 
 public function group.addGroup(group g) returns int
-	return BlzGroupAddGroupFast(this, g)
+	return BlzGroupAddGroupFast(g, this)
 
 public function group.removeGroup(group g) returns int
-	return BlzGroupRemoveGroupFast(this, g)
+	return BlzGroupRemoveGroupFast(g, this)
 
 public function group.getUnitAt(int index) returns unit
 	return BlzGroupUnitAt(this, index)
